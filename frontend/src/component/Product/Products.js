@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, getProduct } from "../../actions/productAction";
 import Loader from "../layout/Loader/Loader";
 import ProductCard from "../Home/ProductCard";
-import MetaData from "../layout/MetaData";
-import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
-import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { useAlert } from "react-alert";
+import Typography from "@material-ui/core/Typography";
+import MetaData from "../layout/MetaData";
+import { useParams } from "react-router-dom";
 
 const categories = [
   "Apples",
@@ -19,7 +19,7 @@ const categories = [
   "Vegetables",
 ];
 
-const Product = ({ match }) => {
+const Products = () => {
   const dispatch = useDispatch();
 
   const alert = useAlert();
@@ -27,6 +27,7 @@ const Product = ({ match }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 5000]);
   const [category, setCategory] = useState("");
+
   const [ratings, setRatings] = useState(0);
 
   const {
@@ -47,16 +48,16 @@ const Product = ({ match }) => {
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice);
   };
+  let count = filteredProductsCount;
 
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-    dispatch(getProduct(keyword, currentPage, price, category, ratings));
-  }, [dispatch, keyword, currentPage, price, category, ratings,alert]);
 
-  //let count = filteredProductsCount;
+    dispatch(getProduct(keyword, currentPage, price, category, ratings));
+  }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
   return (
     <Fragment>
@@ -112,27 +113,28 @@ const Product = ({ match }) => {
               />
             </fieldset>
           </div>
-
-          <div className="paginationBox">
-            <Pagination
-              activePage={currentPage}
-              itemsCountPerPage={resultPerPage}
-              totalItemsCount={productsCount}
-              onChange={setCurrentPageNo}
-              nextPageText="Next"
-              prevPageText="Prev"
-              firstPageText="1st"
-              lastPageText="Last"
-              itemClass="page-item"
-              linkClass="page-link"
-              activeClass="pageItemActive"
-              activeLinkClass="pageLinkActive"
-            />
-          </div>
+         
+            <div className="paginationBox">
+              <Pagination
+                activePage={currentPage}
+                itemsCountPerPage={resultPerPage}
+                totalItemsCount={productsCount}
+                onChange={setCurrentPageNo}
+                nextPageText="Next"
+                prevPageText="Prev"
+                firstPageText="1st"
+                lastPageText="Last"
+                itemClass="page-item"
+                linkClass="page-link"
+                activeClass="pageItemActive"
+                activeLinkClass="pageLinkActive"
+              />
+            </div>
+          
         </Fragment>
       )}
     </Fragment>
   );
 };
 
-export default Product;
+export default Products;
