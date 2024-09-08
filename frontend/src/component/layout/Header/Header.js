@@ -1,56 +1,53 @@
-import React from "react";
-import { ReactNavbar } from "overlay-navbar";
+import React , {useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import logo from "../../../images/logo.jpg";
 import { MdAccountCircle } from "react-icons/md";
 import { MdSearch } from "react-icons/md";
 import { MdAddShoppingCart } from "react-icons/md";
 
-const options = {
-  burgerColorHover: "#30d173",
-  logo,
-  logoWidth: "10vmax",
-  navColor1: "#faf9f6",
-  logoHoverSize: "-1px",
-  link1Text: "Home",
-  link2Text: "Products",
-  link3Text: "Contact",
-  link4Text: "About",
-  link1Url: "/",
-  link2Url: "/products",
-  link3Url: "/contact",
-  link4Url: "/about",
-  link1Size: "1.3vmax",
-  link1Color: "rgba(35, 35, 35,0.8)",
-  nav1justifyContent: "flex-end",
-  nav2justifyContent: "flex-end",
-  nav3justifyContent: "flex-start",
-  nav4justifyContent: "flex-start",
-  link1ColorHover: "#30d173",
-  link1Margin: "1vmax",
-  profileIconUrl: "/login",
-  profileIcon: true,
-  profileIconColor: "rgba(35, 35, 35,0.8)",
-  ProfileIconElement: MdAccountCircle,
-  searchIcon: true,
-  searchIconColor: "rgba(35, 35, 35,0.8)",
-  SearchIconElement: MdSearch,
-  cartIcon: true,
-  cartIconColor: "rgba(35, 35, 35,0.8)",
-  CartIconElement: MdAddShoppingCart,
-  profileIconColorHover: "#30d173",
-  searchIconColorHover: "#30d173",
-  cartIconColorHover: "#30d173",
-  cartIconMargin: "1vmax",
-  link1AnimationTime: 0.25,
-  link2AnimationTime: 0.25,
-  link3AnimationTime: 0.25,
-  link4AnimationTime: 0.25,
-  logoAnimationTime: 0.25,
-  searchIconAnimationTime: 0.25,
-};
+
 
 const Header = () => {
-  return <ReactNavbar {...options} />;
+  const navigate = useNavigate();
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+  const [keyword, setKeyword] = useState("");
+
+  const searchSubmitHandler = (e) => {
+    e.preventDefault();
+
+    if (keyword.trim()) {
+      navigate(`/products/${keyword}`);
+    } else {
+      navigate("/products");
+    }
+  };
+    return (
+      <nav className="navbar">
+      <ul className="nav-links">
+        
+        <li onClick={() => handleNavigation('/')}> <div className="home-logo-container"> <img src={logo} alt="Home" className="nav-icon" /></div> </li>
+        <li onClick={() => handleNavigation('/Products')}>Products</li>
+        <li onClick={() => handleNavigation('/Contact')}>Contact</li>
+        <li onClick={() => handleNavigation('/About')}>About</li>
+        <div className="nav-actions">
+        <form onSubmit={searchSubmitHandler} className="search-form">
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={(e) => setKeyword(e.target.value)}
+            className="search-input"
+          />
+          <button type="submit" className="search-btn"><MdSearch size={24}/></button>
+        </form>
+        <li onClick={() => handleNavigation('/Account')}><MdAccountCircle size={24} /></li>
+        <li onClick={() => handleNavigation('/Cart')}><MdAddShoppingCart size={24} /></li>
+        </div>
+      </ul>
+    </nav>
+    );
+  
 };
 
 export default Header;
