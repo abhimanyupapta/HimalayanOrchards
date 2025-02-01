@@ -1,0 +1,52 @@
+.dashboard {
+    width: 100vw;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    position: absolute;
+    background-color: #faf9f6;
+  }
+
+  .dashboard-right {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    margin: auto;
+    font: 200 1rem "Roboto";
+    color: rgba(0, 0, 0, 0.493);
+    
+  }
+ 
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: 4rem;
+    align-items: center;
+    background-color: white;
+    margin: 1rem;
+    border-radius: 50px;
+  }
+
+  .card > h1 {
+    margin-bottom: 1rem;
+  }
+
+  
+  @media screen and (max-width: 600px) {
+    .dashboard {
+      grid-template-columns: 1fr;
+    }
+  
+    .dashboardContainer {
+      border-left: none;
+    }
+  
+    .dashboardSummary > div > p {
+      margin: 0;
+    }
+  
+    .dashboardSummaryBox2 > a {
+      padding: 0.5rem;
+      margin: 1rem;
+      font: 300 0.9rem "Roboto";
+    }
+  }
