@@ -49,7 +49,7 @@ function App() {
 
   async function getStripeApiKey() {
     try {
-      const { data } = await axios.get("http://localhost:4500/api/v1/stripeapikey");
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/stripeapikey`);
       setStripeApiKey(data.stripeApiKey);
     } catch (error) {
       console.error("Failed to fetch Stripe API Key:", error);
