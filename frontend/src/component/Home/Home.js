@@ -38,6 +38,7 @@ const Home = () => {
               </button>
             </a>
           </div>
+          <div classname = 'prod'>
           <h2 className="homeHeading">Our Products</h2>
 
           <div className="container" id="container">
@@ -45,6 +46,7 @@ const Home = () => {
               products.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
+          </div>
           </div>
         </Fragment>
       )}

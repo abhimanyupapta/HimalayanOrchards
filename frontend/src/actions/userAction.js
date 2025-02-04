@@ -38,6 +38,8 @@ import {
 } from "../constants/userConstants";
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 // Login
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -53,6 +55,7 @@ export const login = (email, password) => async (dispatch) => {
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
+    console.log(`coming here ${error}`)
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
   }
 };

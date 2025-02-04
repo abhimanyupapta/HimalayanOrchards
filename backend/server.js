@@ -1,9 +1,8 @@
 const app = require("./app");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
-const cors = require("cors");
 
-app.use(cors());
+
 
 // Handling unCaught exeption
 process.on("uncaughtException", (err) => {
@@ -11,6 +10,8 @@ process.on("uncaughtException", (err) => {
   console.log(`Shutting down the server due to unCaught exeption`);
   process.exit(1);
 });
+
+require("dotenv").config({ path: "./config/config.env" });
 
 // Config
 //if (process.env.NODE_ENV !== "PRODUCTION") {

@@ -4,9 +4,12 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const path = require("path");
+
 const cors = require("cors");
 
 const errorMiddleware = require("./middleware/error");
+
+require("dotenv").config({ path: "./config/config.env" });
 
 // Config
 //if (process.env.NODE_ENV !== "PRODUCTION") {
@@ -14,8 +17,16 @@ const errorMiddleware = require("./middleware/error");
 //}
 
 // Enable CORS for frontend
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.ALLOWED_ORIGINS, // Allow these domains
+    credentials: true, // Allow credentials
+  })
+);
 
+app.options("*", cors());
+
+  
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
