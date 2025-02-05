@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "./ProductCard";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
@@ -22,6 +23,13 @@ const Home = () => {
     }
     dispatch(getProduct());
   }, [dispatch, error, alert]);
+
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <Fragment>
       {loading ? (
@@ -32,21 +40,23 @@ const Home = () => {
           <div className="banner">
             <h1>Welcome to Himalayan Orchards</h1>
             <p>Here’s To Those Who Work In Acres, Not In Hours</p>
-            <a href="#container">
+            <a href="#prod">
               <button>
                 Scroll <CgMouse />
               </button>
             </a>
           </div>
-          <div classname = 'prod'>
+          <div classname = "prod" id = "prod">
           <h2 className="homeHeading">Our Products</h2>
 
           <div className="container" id="container">
             {products &&
-              products.map((product) => (
+              products.slice(0,8).map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
+         
           </div>
+          <h2 className="Prod-Btn" onClick={() => handleNavigation("/Products")}>More</h2>
           </div>
         </Fragment>
       )}

@@ -37,13 +37,13 @@ const Header = () => {
   return (
     <nav className="navbar">
       <div className={`menu-icon ${isMenuOpen ? "open" : "close"}`} onClick={toggleMenu}>
-      {isMenuOpen ? <MdClose className="icon-transition" size={30} /> : <MdMenu className="icon-transition" size={30} />}
+      {isMenuOpen ? <MdClose className="icon-transition" size={40} /> : <MdMenu className="icon-transition" size={40} />}
       </div>
 
       <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
         <li onClick={() => handleNavigation("/")}>
           <div className="home-logo-container">
-            <img src={logo} alt="Home" className="nav-icon" />
+            <img src={logo} alt="Home" className="nav-icon"/>
           </div>
         </li>
         <div className="nav-actions">
