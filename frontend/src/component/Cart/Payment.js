@@ -35,6 +35,13 @@ const Payment = () => {
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
+    address: {
+      line1: shippingInfo.address,
+      city: shippingInfo.city,
+      state: shippingInfo.state,
+      postal_code: shippingInfo.pinCode,
+      country: shippingInfo.country,
+    }
   };
 
   const order = {
@@ -57,8 +64,10 @@ const Payment = () => {
           "Content-Type": "application/json",
         },
       };
+
+      console.log(paymentData);
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        `${process.env.REACT_APP_API_URL}/api/v1/payment/process`,
         paymentData,
         config
       );
@@ -104,6 +113,7 @@ const Payment = () => {
       }
     } catch (error) {
       payBtn.current.disabled = false;
+      console.log(error.response.data.message);
       alert.error(error.response.data.message);
     }
   };

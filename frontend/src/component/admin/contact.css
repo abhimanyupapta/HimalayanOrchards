@@ -1,0 +1,89 @@
+.contactContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9; /* Softer background color */
+    padding: 20px; /* Add padding for smaller screens */
+    box-sizing: border-box;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+  
+  .contactForm {
+    width: 100%;
+    max-width: 450px; /* Slightly smaller max width for better proportions */
+    padding: 30px; /* Increased padding for better spacing */
+    border: 1px solid #e0e0e0; /* Softer border color */
+    border-radius: 12px; /* Slightly larger border radius for a modern look */
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
+  }
+  
+  .contactForm h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2rem; /* Larger font size for the heading */
+    color: #333333;
+    font-weight: bold;
+  }
+  
+  .contactField {
+    margin-bottom: 20px; /* Increased spacing between fields */
+  }
+  
+  .contactField input {
+    width: 100%;
+    padding: 12px; /* Slightly larger padding for better usability */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Rounded corners for inputs */
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .contactField input:focus {
+    border-color: var(--green-color); /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(0, 128, 0, 0.2); /* Add subtle shadow on focus */
+    outline: none;
+  }
+  
+  .contactSubmitBtn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--green-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem; /* Slightly larger font size for the button */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .contactSubmitBtn:hover {
+    background-color: var(--hover-green);
+    transform: scale(1.02); /* Slight zoom effect on hover */
+  }
+  
+  .contactSubmitBtn:active {
+    transform: scale(0.98); /* Slight shrink effect on click */
+  }
+  
+  @media screen and (max-width: 600px) {
+    .contactForm {
+      padding: 20px; /* Adjust padding for smaller screens */
+    }
+  
+    .contactForm h1 {
+      font-size: 1.8rem; /* Slightly smaller heading for smaller screens */
+    }
+  
+    .contactField input {
+      font-size: 0.9rem; /* Adjust font size for smaller screens */
+    }
+  
+    .contactSubmitBtn {
+      font-size: 1rem; /* Adjust button font size for smaller screens */
+    }
+  }

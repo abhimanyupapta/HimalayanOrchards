@@ -45,6 +45,7 @@ const UsersList = lazy(() => import("./component/admin/UsersList"));
 const UpdateUser = lazy(() => import("./component/admin/UpdateUser"));
 const ProductReviews = lazy(() => import("./component/admin/ProductReviews"));
 const NotFound = lazy(() => import("./component/layout/NotFound/NotFound"));
+const Contact = lazy(() => import("./component/admin/Contact"));
 
 function ProtectedRoute({ isAdmin, children, redirectTo }) {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -120,7 +121,9 @@ function App() {
           <Route path="/admin/users" element={<ProtectedRoute isAdmin redirectTo="/login"><UsersList /></ProtectedRoute>} />
           <Route path="/admin/user/:id" element={<ProtectedRoute isAdmin redirectTo="/login"><UpdateUser /></ProtectedRoute>} />
           <Route path="/admin/reviews" element={<ProtectedRoute isAdmin redirectTo="/login"><ProductReviews /></ProtectedRoute>} />
+          <Route path="/admin/contact" element={<ProtectedRoute isAdmin redirectTo="/login"><Contact /></ProtectedRoute>} />
 
+          {/* Other Routes */}
           <Route path="/login" element={<LoginSignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
