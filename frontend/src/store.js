@@ -15,9 +15,7 @@ import {
   profileReducer,
   forgotPasswordReducer,
   allUsersReducer,
-  userDetailsReducer,
-  adminContactReducer,
-  postContactReducer
+  userDetailsReducer
 } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
 import {
@@ -27,7 +25,10 @@ import {
   orderDetailsReducer,
   orderReducer,
 } from "./reducers/orderReducer";
-import { getContactAdmin } from "./actions/userAction";
+
+import {
+  adminContactReducer,
+  postContactReducer} from "./reducers/CustomDataReducer"; 
 
 const reducer = combineReducers({
   products: productsReducer,

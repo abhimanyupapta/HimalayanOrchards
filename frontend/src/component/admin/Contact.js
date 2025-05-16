@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import "./contact.css";
 import { useDispatch } from "react-redux";
-import { postContactDetails, getContactAdmin } from "../../actions/userAction";
+import { postContactDetails, getContactAdmin } from "../../actions/customDataAction";
 import { useAlert } from "react-alert";
 
 const Contact = () => {

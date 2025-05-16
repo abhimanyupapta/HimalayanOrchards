@@ -4,7 +4,7 @@ import { CgMail } from "react-icons/cg";
 import { CgFacebook } from "react-icons/cg";
 import { CgInstagram } from "react-icons/cg";
 import { useSelector, useDispatch } from "react-redux"; // Import useDispatch
-import { getContactAdmin, clearErrors } from "../../../actions/userAction"; // Import the action
+import { getContactAdmin, clearErrors } from "../../../actions/customDataAction"; // Import the action
 import "./Footer.css";
 import { useAlert } from "react-alert";
 
@@ -12,6 +12,8 @@ const Footer = () => {
   const alert = useAlert(); // Initialize alert
   const dispatch = useDispatch(); // Initialize dispatch
   const { loading, error, contact } = useSelector((state) => state.contact);
+
+
 
   useEffect(() => {
     if(error) {
