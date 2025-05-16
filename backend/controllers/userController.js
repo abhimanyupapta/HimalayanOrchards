@@ -1,10 +1,12 @@
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncErrors");
 const User = require(`../models/userModel`);
+const CustomDetails = require("../models/customDetails");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
+const customDetails = require("../models/customDetails");
 
 //Register a user
 exports.registerUser = catchAsyncError(async (req, res, next) => {
@@ -60,7 +62,7 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
-
+  console.log(user);
   sendToken(user, 200, res);
 });
 
@@ -282,3 +284,44 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
     message: "User Deleted Successfully",
   });
 });
+
+
+ exports.contactAdmin = catchAsyncError(async (req, res, next) => {
+   const { phone, email, facebook, instagram } = req.body;
+
+   // Find or create the custom details document
+  let existingDetails = await customDetails.findOne({});
+  if (!existingDetails) {
+    existingDetails = new customDetails({
+      contactDetails: { phone, email, facebook, instagram },
+    });
+  } else {
+    // Update the contact details if provided
+    if (phone) existingDetails.contactDetails.phone = phone;
+    if (email) existingDetails.contactDetails.email = email;
+    if (facebook) existingDetails.contactDetails.facebook = facebook;
+    if (instagram) existingDetails.contactDetails.instagram = instagram;
+  }
+
+   await existingDetails.save();
+
+   res.status(200).json({
+     success: true,
+     message: "Contact details updated successfully",
+     contactDetails: existingDetails.contactDetails,
+   });
+ });
+
+
+ exports.contactGet = catchAsyncError(async (req, res, next) => {
+  const contactDetails = await customDetails.findOne({});
+
+  if (!contactDetails) {
+    return next(new ErrorHandler("No contact details found", 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    contactDetails: contactDetails.contactDetails,
+  });
+ });  

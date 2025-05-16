@@ -50,4 +50,18 @@ router
     userController.deleteUser
   );
 
+router
+  .route("/admin/contact")
+  .post(
+    isAuth.isAuthenticated,
+    isAuth.authorizeRoles("admin"),
+    userController.contactAdmin
+  ); 
+
+router
+  .route("/contact")
+  .get(
+    userController.contactGet
+  )  
+
 module.exports = router;
