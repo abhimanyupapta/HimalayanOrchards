@@ -39,6 +39,12 @@ import {
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
   CLEAR_ERRORS,
+  ADMIN_CONTACT_REQUEST,
+  ADMIN_CONTACT_SUCCESS,
+  ADMIN_CONTACT_FAIL,
+  POST_CONTACT_REQUEST,
+  POST_CONTACT_SUCCESS,
+  POST_CONTACT_FAIL
 } from "../constants/userConstants";
 
 export const userReducer = (state = { user: {} }, action) => {
@@ -268,4 +274,68 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
     default:
       return state;
   }
+};
+
+
+export const adminContactReducer = (state = {contact: {}}, action) => {
+  switch (action.type) {
+    case ADMIN_CONTACT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADMIN_CONTACT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        contact: action.payload,
+      };
+
+    case ADMIN_CONTACT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+}
+
+// filepath: c:\projects\him_apples_offshore_testing\HimalayanOrchards\frontend\src\reducers\userReducer.js
+export const postContactReducer = (state = {contact: {}}, action) => {
+  switch (action.type) {
+    case POST_CONTACT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case POST_CONTACT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        contact: action.payload,
+      };
+    case POST_CONTACT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+
 };

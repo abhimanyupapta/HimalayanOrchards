@@ -22,6 +22,8 @@ import {
 
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 // Create Order
 export const createOrder = (order) => async (dispatch) => {
   try {
@@ -52,6 +54,7 @@ export const myOrders = () => async (dispatch) => {
 
     dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
+    console.log(error, error.response.data);
     dispatch({
       type: MY_ORDERS_FAIL,
       payload: error.response.data.message,

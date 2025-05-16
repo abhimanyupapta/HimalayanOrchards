@@ -16,6 +16,8 @@ import {
   forgotPasswordReducer,
   allUsersReducer,
   userDetailsReducer,
+  adminContactReducer,
+  postContactReducer
 } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
 import {
@@ -25,6 +27,7 @@ import {
   orderDetailsReducer,
   orderReducer,
 } from "./reducers/orderReducer";
+import { getContactAdmin } from "./actions/userAction";
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -45,6 +48,8 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   productReviews: productReviewsReducer,
   review: reviewReducer,
+  contact: adminContactReducer,
+  postContactAdmin: postContactReducer,
 });
 
 let initialState = {

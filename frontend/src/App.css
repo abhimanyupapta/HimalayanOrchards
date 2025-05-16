@@ -6,7 +6,8 @@
 
   :root {
  --hover-green: #30d173;
- --green-color: rgb(28, 164, 112);
+ --green-color: #5DB996;
+ --bg-color: #ffffff;
   }
  
   
@@ -23,7 +24,7 @@
   }
   
   .greenColor {
-    color: green !important;
+    color: rgb(255, 255, 255) !important;
   }
   .redColor {
     color: red !important;

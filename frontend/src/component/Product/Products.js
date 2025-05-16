@@ -12,11 +12,12 @@ import MetaData from "../layout/MetaData";
 import { useParams } from "react-router-dom";
 
 const categories = [
+  "All",
   "Apples",
   "Apple Products",
   "Cheries",
   "Other Fruits",
-  "Vegetables",
+  "Vegetables"
 ];
 
 const Products = () => {
@@ -45,9 +46,7 @@ const Products = () => {
     setCurrentPage(e);
   };
 
-  const priceHandler = (event, newPrice) => {
-    setPrice(newPrice);
-  };
+  
   let count = filteredProductsCount;
 
   useEffect(() => {
@@ -56,14 +55,29 @@ const Products = () => {
       dispatch(clearErrors());
     }
 
+    if(category === "All") {
+      setCategory("");
+    } 
+
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
-  }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
+  }, [dispatch, keyword, currentPage, category, alert, error]);
+
+
+const priceHandler = (event, newPrice) => {
+    setPrice(newPrice);
+  };
+
+const sliderHandler = () => {
+  dispatch(getProduct(keyword, currentPage, price, category, ratings));
+};  
+  
 
   return (
     <Fragment>
       {loading ? (
         <Loader />
       ) : (
+        products && products.length > 0 ? (
         <Fragment>
           <MetaData title="PRODUCTS" />
           <h2 className="productsHeading">Products</h2>
@@ -80,6 +94,7 @@ const Products = () => {
             <Slider
               value={price}
               onChange={priceHandler}
+              onChangeCommitted={sliderHandler}
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
@@ -106,6 +121,7 @@ const Products = () => {
                 onChange={(e, newRating) => {
                   setRatings(newRating);
                 }}
+                onChangeCommitted={sliderHandler}
                 aria-labelledby="continuous-slider"
                 valueLabelDisplay="auto"
                 min={0}
@@ -132,9 +148,51 @@ const Products = () => {
             </div>
           
         </Fragment>
-      )}
+      ): (<>
+      <h2 className="productsHeading">No Products Found</h2>
+        <div className="filterBox">
+            <Typography>Price</Typography>
+            <Slider
+              value={price}
+              onChange={priceHandler}
+              onChangeCommitted={sliderHandler}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              min={0}
+              max={5000}
+            />
+
+            <Typography>Categories</Typography>
+            <ul className="categoryBox">
+              {categories.map((category) => (
+                <li
+                  className="category-link"
+                  key={category}
+                  onClick={() => setCategory(category)}
+                >
+                  {category}
+                </li>
+              ))}
+            </ul>
+
+            <fieldset>
+              <Typography component="legend">Ratings Above</Typography>
+              <Slider
+                value={ratings}
+                onChange={(e, newRating) => {
+                  setRatings(newRating);
+                }}
+                onChangeCommitted={sliderHandler}
+                aria-labelledby="continuous-slider"
+                valueLabelDisplay="auto"
+                min={0}
+                max={5}
+              />
+            </fieldset>
+          </div>
+          </>
+      ))}
     </Fragment>
-  );
-};
+  )};
 
 export default Products;
